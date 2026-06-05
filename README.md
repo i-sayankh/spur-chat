@@ -7,7 +7,7 @@ API. Every message is persisted to PostgreSQL.
 The emphasis is on **clean separation of concerns** and clear extensibility
 seams (more channels, more LLM providers) over feature count.
 
-**Live demo:** _<add the Vercel URL here after deploying — see [Deployment](#deployment)>_
+**Live demo:** <https://spur-chat-sable.vercel.app/>
 
 ---
 
