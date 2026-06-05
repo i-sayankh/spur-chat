@@ -33,6 +33,28 @@ export function errorHandler(
     return res.status(502).json({ error: FRIENDLY_LLM_MESSAGE });
   }
 
+  // Body-parser errors (malformed JSON, payload too large) arrive as
+  // http-errors with a 4xx status. Surface a clean message, not a 500.
+  const status = httpErrorStatus(err);
+  if (status === 400) {
+    return res.status(400).json({ error: "Invalid request body." });
+  }
+  if (status === 413) {
+    return res.status(413).json({ error: "Message is too large." });
+  }
+
   console.error("[UnhandledError]", err);
   return res.status(500).json({ error: "Something went wrong. Please try again." });
+}
+
+/** Extract a 4xx status from a thrown body-parser / http-errors object. */
+function httpErrorStatus(err: unknown): number | undefined {
+  if (typeof err === "object" && err !== null) {
+    const status = (err as { status?: number; statusCode?: number }).status ??
+      (err as { statusCode?: number }).statusCode;
+    if (typeof status === "number" && status >= 400 && status < 500) {
+      return status;
+    }
+  }
+  return undefined;
 }

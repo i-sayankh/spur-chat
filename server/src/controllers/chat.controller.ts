@@ -13,7 +13,10 @@ import { chatService } from "../services/chat.service";
 
 export const chatMessageSchema = z.object({
   message: z
-    .string({ required_error: "Message cannot be empty." })
+    .string({
+      required_error: "Message cannot be empty.",
+      invalid_type_error: "Message must be text.",
+    })
     .trim()
     .min(1, "Message cannot be empty."),
   sessionId: z.string().min(1).optional(),
