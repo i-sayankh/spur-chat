@@ -1,20 +1,20 @@
 import { env } from "../../config/env";
 import type { LLMProvider } from "./llm.types";
+import { OpenAIProvider } from "./openai.provider";
 import { StubProvider } from "./stub.provider";
 
 /**
  * Factory: pick the LLM provider from env. This is the one place that knows
  * which concrete implementation is in use — callers depend only on LLMProvider.
- *
- * The real OpenAI provider is wired in here in the next build step; for now the
- * stub keeps the whole request path runnable without a key.
+ * Adding Claude later = a new ClaudeProvider file + a case here.
  */
 export function createLLMProvider(): LLMProvider {
   switch (env.LLM_PROVIDER) {
     case "stub":
       return new StubProvider();
+    case "openai":
     default:
-      return new StubProvider();
+      return new OpenAIProvider();
   }
 }
 
