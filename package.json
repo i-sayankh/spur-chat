@@ -2,19 +2,23 @@
   "name": "spur-chat",
   "version": "1.0.0",
   "private": true,
-  "description": "Spur — AI live chat agent for a fictional e-commerce store",
+  "description": "Spur \u2014 AI live chat agent for a fictional e-commerce store",
   "workspaces": [
     "shared",
     "server",
     "web"
   ],
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^3.3.2"
+  },
   "scripts": {
-    "build:shared": "npm run build --workspace shared",
-    "build:server": "npm run build:shared && npm run build --workspace @spur-chat/server",
-    "build:web": "npm run build:shared && npm run build --workspace @spur-chat/web",
-    "build": "npm run build --workspaces --if-present",
-    "dev:server": "npm run dev --workspace server",
-    "dev:web": "npm run dev --workspace web",
+    "build:shared": "node init && npm run build --workspace shared",
+    "build:server": "node init && npm run build:shared && npm run build --workspace @spur-chat/server",
+    "build:web": "node init && npm run build:shared && npm run build --workspace @spur-chat/web",
+    "build": "node init && npm run build --workspaces --if-present",
+    "dev:server": "node init && npm run dev --workspace server",
+    "dev:web": "node init && npm run dev --workspace web",
     "prisma:migrate": "npm run prisma:migrate --workspace server",
     "prisma:deploy": "npm run prisma:deploy --workspace server",
     "prisma:seed": "npm run prisma:seed --workspace server"
