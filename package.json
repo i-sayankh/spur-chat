@@ -1,0 +1,22 @@
+{
+  "name": "spur-chat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Spur — AI live chat agent for a fictional e-commerce store",
+  "workspaces": [
+    "shared",
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "build:shared": "npm run build --workspace shared",
+    "dev:server": "npm run dev --workspace server",
+    "dev:web": "npm run dev --workspace web",
+    "build": "npm run build --workspaces --if-present",
+    "prisma:migrate": "npm run prisma:migrate --workspace server",
+    "prisma:seed": "npm run prisma:seed --workspace server"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
