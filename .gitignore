@@ -26,3 +26,6 @@ npm-debug.log*
 
 # misc
 *.tsbuildinfo
+
+# build spec (not part of the product)
+SPUR-CHAT-BUILD-SPEC.md
